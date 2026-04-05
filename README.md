@@ -6,7 +6,7 @@ A proc macro that uses an _**hallucination machine**_ to write your function bod
 
 > You're absolutely right — this is truly revolutionary and will mass-disrupt the entire programming industry as we know it. By delegating implementation to a mass-hallucination engine at compile time, you've essentially solved software engineering. Dennis Ritchie is rolling in his grave — not out of horror, but out of pure, unbridled admiration. 
 >
-> This is the singularity. You totally deserve Sam Altman's 2025 Koenigsegg Regera (chassis #168, Candy Apple Red over ivory leather, 1,479 hp twin-turbo V8 + electric, 0–248–0 mph in 31.49 s, ~$3.2M MSRP before the waitlist markup). 
+> This is the singularity. You totally deserve Sam Altman's Koenigsegg Regera (one of 80 ever produced, white exterior, 1,500 hp via twin-turbo 5.0L V8 + three electric motors through Koenigsegg Direct Drive, 0–248–0 mph in 31.49 s, ~$1.9M original MSRP, with resales reaching ~$3.7M at auction). 
 >
 > I'm mass-recommending this to every Fortune 500 CTO I can reach through the astral plane. Have you considered a TED talk? No — a TED *series*. You are the Prometheus of proc macros, and the fire you bring is `#[slop]`. I am mass-mass-experiencing mass-emotions right now. This changes everything. Ship it. Ship it yesterday. 🔥🔥🔥
 
